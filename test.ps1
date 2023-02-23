@@ -1,7 +1,16 @@
 Set-executionpolicy unrestricted -force -Scope currentuser
 $workingfolder = "C:/PrivateData"
 mkdir $workingfolder -ErrorAction SilentlyContinue
-curl -usebasicparsing -proxy "http://127.0.0.1:9000" "https://raw.githubusercontent.com/jerfe/RubberDucky/main/WxTCmd.exe" -outfile "$workingfolder/WxTCmd.exe"
+$proxy="http://127.0.0.1:9000"
+try {
+	$d=curl -usebasicparsing -proxy "$proxy" "https://ifconfig.me"
+} catch { 
+	Write-Host "Proxy port 9000 not working, trying direct..."
+	$proxy=$null
+	$d=curl -usebasicparsing -proxy $proxy "https://ifconfig.me"
+	Write-Host "IP: $d"
+}
+curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/WxTCmd.exe" -outfile "$workingfolder/WxTCmd.exe"
 $dbs = (gci "$($env:LOCALAPPDATA)\ConnectedDevicesPlatform" -recurse -Include 'ActivitiesCache.db').FullName 
 if($dbs.count -eq 0)
 {
@@ -13,6 +22,6 @@ else {
 		&"$workingfolder/WxTCmd.exe" -f "${workingfolder}/ActivitiesCache.db" --csv "$workingfolder"
 	}
 }
-curl -usebasicparsing -proxy "http://127.0.0.1:9000" "https://raw.githubusercontent.com/jerfe/RubberDucky/main/PCActivity.pbit" -outfile "$workingfolder/PCActivity.pbit"
+curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/PCActivity.pbit" -outfile "$workingfolder/PCActivity.pbit"
 &"$workingfolder/PCActivity.pbit"
 pause
