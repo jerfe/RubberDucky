@@ -19,6 +19,7 @@ if($dbs.count -eq 0)
 {
 	Write-Host "No activities found"
 } else {
+	cd "$workingfolder/"
 	$dbs| foreach {
 		cp "$_" "$workingfolder/"
 		&"$workingfolder/WxTCmd.exe" -f "${workingfolder}/ActivitiesCache.db" --csv "$workingfolder"
